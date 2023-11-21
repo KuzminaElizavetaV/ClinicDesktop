@@ -1,0 +1,641 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ClinicAPI",
+    "description": "Учебный проект по созданию API для web-сервиса Clinic (Ветеринарная клиника) с использованием фреймворка FastAPI (Python) и SQLAlchemy (ORM)",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/clients/": {
+      "get": {
+        "tags": [ "Клиенты" ],
+        "summary": "Get Clients",
+        "description": "get_all_clients",
+        "operationId": "ClientGetAll",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": { "$ref": "#/components/schemas/Client" },
+                  "type": "array",
+                  "title": "Response Clientgetall"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [ "Клиенты" ],
+        "summary": "Add Client",
+        "description": "add_client",
+        "operationId": "ClientAdd",
+        "requestBody": {
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ClientIn" } } },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Client" } } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } } }
+          }
+        }
+      }
+    },
+    "/clients/{client_id}": {
+      "get": {
+        "tags": [ "Клиенты" ],
+        "summary": "Get Client",
+        "description": "get_client",
+        "operationId": "ClientGet",
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Client Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Client" } } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } } }
+          }
+        }
+      },
+      "put": {
+        "tags": [ "Клиенты" ],
+        "summary": "Update Client",
+        "description": "update_client",
+        "operationId": "ClientUpdate",
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Client Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ClientIn" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Client" } } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } } }
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "Клиенты" ],
+        "summary": "Delete Client",
+        "description": "delete_client",
+        "operationId": "ClientDelete",
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Client Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } } }
+          }
+        }
+      }
+    },
+    "/pets/": {
+      "get": {
+        "tags": [ "Питомцы" ],
+        "summary": "Get Pets",
+        "description": "get_all_pets",
+        "operationId": "PetGetAll",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": { "$ref": "#/components/schemas/Pet" },
+                  "type": "array",
+                  "title": "Response Petgetall"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [ "Питомцы" ],
+        "summary": "Add Pet",
+        "description": "add_pet",
+        "operationId": "PetAdd",
+        "requestBody": {
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PetIn" } } },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Pet" } } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } } }
+          }
+        }
+      }
+    },
+    "/pets/{pet_id}": {
+      "get": {
+        "tags": [ "Питомцы" ],
+        "summary": "Get Pet",
+        "description": "get_pet",
+        "operationId": "PetGet",
+        "parameters": [
+          {
+            "name": "pet_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Pet Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Pet" } } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } } }
+          }
+        }
+      },
+      "put": {
+        "tags": [ "Питомцы" ],
+        "summary": "Update Pet",
+        "description": "update_pet",
+        "operationId": "PetUpdate",
+        "parameters": [
+          {
+            "name": "pet_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Pet Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PetIn" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Pet" } } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } } }
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "Питомцы" ],
+        "summary": "Delete Pet",
+        "description": "delete_pet",
+        "operationId": "PetDelete",
+        "parameters": [
+          {
+            "name": "pet_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Pet Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } } }
+          }
+        }
+      }
+    },
+    "/consultations/": {
+      "get": {
+        "tags": [ "Консультации" ],
+        "summary": "Get Consultations",
+        "description": "get_all_consultations",
+        "operationId": "ConsultationGetAll",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": { "$ref": "#/components/schemas/Consultation" },
+                  "type": "array",
+                  "title": "Response Consultationgetall"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [ "Консультации" ],
+        "summary": "Add Consultation",
+        "description": "add_consultation",
+        "operationId": "ConsultationAdd",
+        "requestBody": {
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ConsultationIn" } } },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Consultation" } } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } } }
+          }
+        }
+      }
+    },
+    "/consultations/{consultation_id}": {
+      "get": {
+        "tags": [ "Консультации" ],
+        "summary": "Get Consultation",
+        "description": "get_consultation",
+        "operationId": "ConsultationGet",
+        "parameters": [
+          {
+            "name": "consultation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Consultation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Consultation" } } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } } }
+          }
+        }
+      },
+      "put": {
+        "tags": [ "Консультации" ],
+        "summary": "Update Consultation",
+        "description": "update_consultation",
+        "operationId": "ConsultationUpdate",
+        "parameters": [
+          {
+            "name": "consultation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Consultation Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ConsultationIn" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Consultation" } } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } } }
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "Консультации" ],
+        "summary": "Delete Consultation",
+        "description": "delete_consultation",
+        "operationId": "ConsultationDelete",
+        "parameters": [
+          {
+            "name": "consultation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Consultation Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HTTPValidationError" } } }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Root",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Client": {
+        "properties": {
+          "document": {
+            "type": "string",
+            "maxLength": 50,
+            "title": "Document"
+          },
+          "surname": {
+            "type": "string",
+            "maxLength": 30,
+            "title": "Surname"
+          },
+          "firstname": {
+            "type": "string",
+            "maxLength": 30,
+            "title": "First name"
+          },
+          "patronymic": {
+            "type": "string",
+            "maxLength": 30,
+            "title": "Patronymic"
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date",
+            "title": "Birthday"
+          },
+          "phone": {
+            "type": "string",
+            "maxLength": 12,
+            "title": "Phone number"
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 50,
+            "format": "email",
+            "title": "Email"
+          },
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          }
+        },
+        "type": "object",
+        "required": [ "document", "surname", "firstname", "patronymic", "birthday", "phone", "email", "id" ],
+        "title": "Client"
+      },
+      "ClientIn": {
+        "properties": {
+          "document": {
+            "type": "string",
+            "maxLength": 50,
+            "title": "Document"
+          },
+          "surname": {
+            "type": "string",
+            "maxLength": 30,
+            "title": "Surname"
+          },
+          "firstname": {
+            "type": "string",
+            "maxLength": 30,
+            "title": "First name"
+          },
+          "patronymic": {
+            "type": "string",
+            "maxLength": 30,
+            "title": "Patronymic"
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date",
+            "title": "Birthday"
+          },
+          "phone": {
+            "type": "string",
+            "maxLength": 12,
+            "title": "Phone number"
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 50,
+            "format": "email",
+            "title": "Email"
+          }
+        },
+        "type": "object",
+        "required": [ "document", "surname", "firstname", "patronymic", "birthday", "phone", "email" ],
+        "title": "ClientIn"
+      },
+      "Consultation": {
+        "properties": {
+          "consultation_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Consultations day"
+          },
+          "client_id": {
+            "type": "integer",
+            "title": "Clients ID"
+          },
+          "pet_id": {
+            "type": "integer",
+            "title": "Pets ID"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 300,
+            "title": "Description",
+            "default": ""
+          },
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          }
+        },
+        "type": "object",
+        "required": [ "consultation_date", "client_id", "pet_id", "id" ],
+        "title": "Consultation"
+      },
+      "ConsultationIn": {
+        "properties": {
+          "consultation_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Consultations day"
+          },
+          "client_id": {
+            "type": "integer",
+            "title": "Clients ID"
+          },
+          "pet_id": {
+            "type": "integer",
+            "title": "Pets ID"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 300,
+            "title": "Description",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [ "consultation_date", "client_id", "pet_id" ],
+        "title": "ConsultationIn"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Pet": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 50,
+            "title": "Pets name"
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date",
+            "title": "Pets birthday"
+          },
+          "client_id": {
+            "type": "integer",
+            "title": "Clients ID"
+          },
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          }
+        },
+        "type": "object",
+        "required": [ "name", "birthday", "client_id", "id" ],
+        "title": "Pet"
+      },
+      "PetIn": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 50,
+            "title": "Pets name"
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date",
+            "title": "Pets birthday"
+          },
+          "client_id": {
+            "type": "integer",
+            "title": "Clients ID"
+          }
+        },
+        "type": "object",
+        "required": [ "name", "birthday", "client_id" ],
+        "title": "PetIn"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                { "type": "string" },
+                { "type": "integer" }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [ "loc", "msg", "type" ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
