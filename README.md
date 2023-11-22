@@ -19,26 +19,26 @@ ______
 
 ### Редактирование данных
 
-![ClinicDesktopEdit](https://github.com/KuzminaElizavetaV/ClinicDesktop/blob/main/img/clinicClientEdit.png)
+![ClinicDesktopEdit](img/clinicClientEdit.png)
 
-![ClinicDesktopEdit2](https://github.com/KuzminaElizavetaV/ClinicDesktop/blob/main/img/clinicClientEdit2.png)
+![ClinicDesktopEdit2](img/clinicClientEdit2.png)
 
-![ClinicDesktopEdit3](https://github.com/KuzminaElizavetaV/ClinicDesktop/blob/main/img/clinicClientEdit3.png)
+![ClinicDesktopEdit3](img/clinicClientEdit3.png)
 _____
 
 ### Добавление данных
 
-![ClinicDesktopAdd](https://github.com/KuzminaElizavetaV/ClinicDesktop/blob/main/img/clinicClientAdd.png)
+![ClinicDesktopAdd](img/clinicClientAdd.png)
 
-![ClinicDesktopAdd2](https://github.com/KuzminaElizavetaV/ClinicDesktop/blob/main/img/clinicClientAdd2.png)
+![ClinicDesktopAdd2](img/clinicClientAdd2.png)
 
 ----
 
 ### Удаление данных
 
-![ClinicDesktopDelete](https://github.com/KuzminaElizavetaV/ClinicDesktop/blob/main/img/clinicClientDelete.png)
+![ClinicDesktopDelete](img/clinicClientDelete.png)
 
-![ClinicDesktopDelete2](https://github.com/KuzminaElizavetaV/ClinicDesktop/blob/main/img/clinicClientDelete2.png)
+![ClinicDesktopDelete2](img/clinicClientDelete2.png)
 
 
 
